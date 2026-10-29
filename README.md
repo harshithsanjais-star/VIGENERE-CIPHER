@@ -1,7 +1,10 @@
 # VIGENERE-CIPHER
 ## EX. NO: 4
  
-
+```
+Name : HARSHITH SANJAI S 
+Reg. No : 212225040121
+```
 ## IMPLEMETATION OF VIGENERE CIPHER
  
 
@@ -31,6 +34,86 @@ STEP-8: Repeat the above steps to generate the entire cipher text.
 
 ## PROGRAM
 
+```
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void encryption(char PT[], char key[], char CT[])
+{
+    int i, j = 0;
+    int len = strlen(PT);
+    int klen = strlen(key);
+
+    for (i = 0; i < len; i++)
+    {
+        if (isalpha((unsigned char)PT[i]))
+        {
+            CT[i] = ((PT[i] - 'A' + key[j % klen] - 'A') % 26) + 'A';
+            j++;
+        }
+        else
+        {
+            CT[i] = PT[i];
+        }
+    }
+
+    CT[len] = '\0';
+}
+
+void decryption(char CT[], char key[], char DT[])
+{
+    int i, j = 0;
+    int len = strlen(CT);
+    int klen = strlen(key);
+
+    for (i = 0; i < len; i++)
+    {
+        if (isalpha((unsigned char)CT[i]))
+        {
+            DT[i] = ((CT[i] - 'A' - (key[j % klen] - 'A') + 26) % 26) + 'A';
+            j++;
+        }
+        else
+        {
+            DT[i] = CT[i];
+        }
+    }
+
+    DT[len] = '\0';
+}
+
+int main()
+{
+    char PT[100], key[100], CT[100], DT[100];
+    int i;
+
+    printf("Enter the plaintext: ");
+    scanf("%99s", PT);
+
+    printf("Enter the key: ");
+    scanf("%99s", key);
+
+    for (i = 0; PT[i] != '\0'; i++)
+        PT[i] = toupper((unsigned char)PT[i]);
+
+    for (i = 0; key[i] != '\0'; i++)
+        key[i] = toupper((unsigned char)key[i]);
+
+    encryption(PT, key, CT);
+    printf("Encrypted text: %s\n", CT);
+
+    decryption(CT, key, DT);
+    printf("Decrypted text: %s\n", DT);
+
+    return 0;
+}
+```
+
 ## OUTPUT
 
+<img width="475" height="270" alt="image" src="https://github.com/user-attachments/assets/07b6f28a-7509-4b35-a363-cd0281476c77" />
+
+
 ## RESULT
+The implementation of Vigenere Cipher substitution technique using C program is executed sucessfully.
